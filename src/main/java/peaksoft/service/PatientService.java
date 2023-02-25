@@ -15,7 +15,7 @@ public interface PatientService {
 
     void deletePatientById(Long id);
 
-    void updatePatient(Long patientId,Patient patient);
+    void updatePatient(Long patientId, Patient patient);
 
-    void assignPatient(Long appointmentId,Long patientId) throws IOException;
+    void assignPatient(Long appointmentId, Long patientId) throws IOException;
 }

@@ -9,32 +9,32 @@ import peaksoft.service.HospitalService;
 import java.util.List;
 @Service
 public class HospitalServiceImpl implements HospitalService {
-    private final HospitalRepository hospitalRepository;
+    private final HospitalRepository repository;
 
     @Autowired
-    public HospitalServiceImpl(HospitalRepository hospitalRepository) {
-        this.hospitalRepository = hospitalRepository;
+    public HospitalServiceImpl(HospitalRepository repository) {
+        this.repository = repository;
     }
 
 
     @Override
     public List<Hospital> getAllHospitals() {
-        return hospitalRepository.getAllHospitals();
+        return repository.getAllHospitals();
     }
 
     @Override
     public void saveHospital(Hospital hospital) {
-        hospitalRepository.saveHospital(hospital);
+        repository.saveHospital(hospital);
     }
 
     @Override
     public Hospital getHospitalById(Long id) {
-        return hospitalRepository.getHospitalById(id);
+        return repository.getHospitalById(id);
     }
 
     @Override
     public void deleteHospitalById(Long id) {
-        hospitalRepository.deleteHospitalById(id);
+        repository.deleteHospitalById(id);
     }
 
     @Override
@@ -42,6 +42,6 @@ public class HospitalServiceImpl implements HospitalService {
         Hospital hospital1 = getHospitalById(hospital.getId());
         hospital1.setName(hospital.getName());
         hospital1.setAddress(hospital.getAddress());
-        hospitalRepository.updateHospital(hospital1);
+        repository.updateHospital(hospital1);
     }
 }

@@ -10,37 +10,37 @@ import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
-    private final AppointmentRepository appointmentRepository;
+    private final AppointmentRepository repository;
 
     @Autowired
-    public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
-        this.appointmentRepository = appointmentRepository;
+    public AppointmentServiceImpl(AppointmentRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public List<Appointment> getAllAppointment(Long appointmentId){
-        return appointmentRepository.getAllAppointment(appointmentId);
+        return repository.getAllAppointment(appointmentId);
     }
 
     @Override
     public void saveAppointment(Appointment appointment,Long hospitalId) {
         Appointment appointment1 = new Appointment();
         appointment1.setDate(appointment.getDate());
-        appointmentRepository.saveAppointment(appointment1,hospitalId);
+        repository.saveAppointment(appointment1,hospitalId);
     }
 
     @Override
     public Appointment getAppointmentById(Long id) {
-        return appointmentRepository.getAppointmentById(id);
+        return repository.getAppointmentById(id);
     }
 
     @Override
     public void deleteAppointmentById(Long id) {
-        appointmentRepository.deleteAppointmentById(id);
+        repository.deleteAppointmentById(id);
     }
 
     @Override
     public void updateAppointment(Long appointmentId, Appointment appointment) {
-        appointmentRepository.updateAppointment(appointmentId,appointment);
+        repository.updateAppointment(appointmentId,appointment);
     }
 }

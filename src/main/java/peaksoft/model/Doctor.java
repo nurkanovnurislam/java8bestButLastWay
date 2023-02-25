@@ -10,17 +10,14 @@ import java.util.List;
 
 import static jakarta.persistence.CascadeType.*;
 
-@Getter
-@Setter
 @NoArgsConstructor
+@Getter @Setter
 @Table(name = "doctors")
 @Entity
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "doctors_seq")
-    @SequenceGenerator(name = "doctors_seq",
-            sequenceName = "doctors_seq",
-            allocationSize = 1)
+    @SequenceGenerator(name = "doctors_seq", sequenceName = "doctors_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "first_name")

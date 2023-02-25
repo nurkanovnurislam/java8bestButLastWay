@@ -19,19 +19,19 @@ import java.util.List;
 @Transactional
 public class PatientRepositoryImpl implements PatientRepository {
     @PersistenceContext
-    private final EntityManager entityManager;
+    private final EntityManager manager;
 
     private final HospitalRepository hospitalRepository;
 
     @Autowired
     public PatientRepositoryImpl(EntityManager entityManager, HospitalRepository hospitalRepository) {
-        this.entityManager = entityManager;
+        this.manager = entityManager;
         this.hospitalRepository = hospitalRepository;
     }
 
     @Override
     public List<Patient> getAllPatient(Long patientId) {
-        return entityManager.createQuery("select p from Patient p where p.hospital.id=:patientId",
+        return manager.createQuery("select p from Patient p where p.hospital.id=:patientId",
                 Patient.class).setParameter("patientId",patientId).getResultList();
     }
 
@@ -49,47 +49,47 @@ public class PatientRepositoryImpl implements PatientRepository {
         patient1.setPhoneNumber(patient.getPhoneNumber());
         patient1.setHospital(hospital);
         hospital.plusPatient();
-        entityManager.persist(patient1);
+        manager.persist(patient1);
     }
 
     @Override
     public Patient getPatientById(Long id) {
-        return entityManager.find(Patient.class,id);
+        return manager.find(Patient.class,id);
     }
 
     @Override
     public void deletePatientById(Long id) {
-        Patient patient = entityManager.find(Patient.class,id);
+        Patient patient = manager.find(Patient.class,id);
         patient.getHospital().minusPatient();
-        entityManager.remove(entityManager.find(Appointment.class,id));
-        entityManager.remove(entityManager.find(Patient.class,id));
+        manager.remove(manager.find(Appointment.class,id));
+        manager.remove(manager.find(Patient.class,id));
     }
 
     @Override
     public void updatePatient(Long patientId, Patient patient) {
-        Patient patient1 = entityManager.find(Patient.class, patientId);
+        Patient patient1 = manager.find(Patient.class, patientId);
         patient1.setFirstName(patient.getFirstName());
         patient1.setLastName(patient.getLastName());
         patient1.setEmail(patient.getEmail());
         patient1.setPhoneNumber(patient.getPhoneNumber());
         patient1.setGender(patient.getGender());
-        entityManager.merge(patient1);
+        manager.merge(patient1);
     }
 
     @Override
     public void assignPatient(Long appointmentId, Long patientId) throws IOException {
-        Patient patient = entityManager.find(Patient.class, patientId);
-        Appointment appointment = entityManager.find(Appointment.class, appointmentId);
+        Patient patient = manager.find(Patient.class, patientId);
+        Appointment appointment = manager.find(Appointment.class, appointmentId);
         if (appointment.getPatient()!=null){
             for (Patient p: appointment.getHospital().getPatients()) {
-                if (p.getId()==patientId){
-                    throw new IOException("Bul Patient uje koshulgan");
+                if (p.getId() == patientId){
+                    throw new IOException("this is patient added");
                 }
             }
         }
         patient.addAppointment(appointment);
         appointment.setPatient(patient);
-        entityManager.merge(patient);
-        entityManager.merge(appointment);
+        manager.merge(patient);
+        manager.merge(appointment);
     }
 }

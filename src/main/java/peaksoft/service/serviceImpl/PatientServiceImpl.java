@@ -16,17 +16,17 @@ import java.util.List;
 @Transactional
 public class PatientServiceImpl implements PatientService {
 
-    private final PatientRepository patientRepository;
+    private final PatientRepository repository;
 
     @Autowired
-    public PatientServiceImpl(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
+    public PatientServiceImpl(PatientRepository repository) {
+        this.repository = repository;
     }
 
 
     @Override
     public List<Patient> getAllPatient(Long patientId) {
-        return patientRepository.getAllPatient(patientId);
+        return repository.getAllPatient(patientId);
     }
 
     @Override
@@ -38,34 +38,34 @@ public class PatientServiceImpl implements PatientService {
         patient1.setPhoneNumber(patient.getPhoneNumber());
         patient1.setEmail(patient.getEmail());
         patient1.setGender(patient.getGender());
-        patientRepository.savePatient(patient1, hospitalId);
+        repository.savePatient(patient1, hospitalId);
     }
 
     @Override
     public Patient getPatientById(Long id) {
-        return patientRepository.getPatientById(id);
+        return repository.getPatientById(id);
     }
 
     @Override
     public void deletePatientById(Long id) {
-        patientRepository.deletePatientById(id);
+        repository.deletePatientById(id);
     }
 
     @Override
     public void updatePatient(Long patientId, Patient patient) {
-        Patient patient1 = patientRepository.getPatientById(patientId);
+        Patient patient1 = repository.getPatientById(patientId);
         patient1.setFirstName(patient.getFirstName());
         patient1.setLastName(patient.getLastName());
         patient1.setEmail(patient.getEmail());
         validation(patient.getPhoneNumber().replace(" ", ""));
         patient1.setPhoneNumber(patient.getPhoneNumber());
         patient1.setGender(patient.getGender());
-        patientRepository.updatePatient(patientId, patient);
+        repository.updatePatient(patientId, patient);
     }
 
     @Override
     public void assignPatient(Long appointmentId, Long patientId) throws IOException {
-        patientRepository.assignPatient(appointmentId, patientId);
+        repository.assignPatient(appointmentId, patientId);
     }
 
     public void validation(String phoneNumber) {
@@ -78,13 +78,13 @@ public class PatientServiceImpl implements PatientService {
             for (Character i : phoneNumber.toCharArray()) {
                 if (count != 0){
                     if (!Character.isDigit(i)){
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"номер!!!");
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"number not in valid range");
                     }
                 }
                 count++;
             }
         }else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"номер!!!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"number not found");
         }
     }
 }

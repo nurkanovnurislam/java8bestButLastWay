@@ -14,32 +14,32 @@ import java.util.List;
 public class HospitalRepositoryImpl implements HospitalRepository {
 
     @PersistenceContext
-    private  final EntityManager entityManager;
+    private  final EntityManager manager;
 
     @Autowired
     public HospitalRepositoryImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+        this.manager = entityManager;
     }
 
 
     @Override
     public List<Hospital> getAllHospitals() {
-        return entityManager.createQuery("select h from Hospital h",Hospital.class).getResultList();
+        return manager.createQuery("select h from Hospital h",Hospital.class).getResultList();
     }
 
     @Override
     public void saveHospital(Hospital hospital) {
-        entityManager.persist(hospital);
+        manager.persist(hospital);
     }
 
     @Override
     public Hospital getHospitalById(Long id) {
-        return entityManager.find(Hospital.class,id);
+        return manager.find(Hospital.class,id);
     }
 
     @Override
     public void deleteHospitalById(Long id) {
-        entityManager.remove(entityManager.find(Hospital.class,id));
+        manager.remove(manager.find(Hospital.class,id));
     }
 
     @Override
@@ -47,6 +47,6 @@ public class HospitalRepositoryImpl implements HospitalRepository {
         Hospital hospital1 = getHospitalById(hospital.getId());
         hospital1.setName(hospital.getName());
         hospital1.setAddress(hospital.getAddress());
-        entityManager.merge(hospital1);
+        manager.merge(hospital1);
     }
 }

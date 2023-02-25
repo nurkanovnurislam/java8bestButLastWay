@@ -15,7 +15,7 @@ public interface DoctorService {
 
     void deleteDoctorById(Long id);
 
-    void updateDoctor(Long doctorId,Doctor doctor);
+    void updateDoctor(Long doctorId, Doctor doctor);
 
-    void assignDoctor(Long appointmentId,Long doctorId) throws IOException;
+    void assignDoctor(Long appointmentId, Long doctorId) throws IOException;
 }

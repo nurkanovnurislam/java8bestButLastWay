@@ -8,7 +8,7 @@ import java.util.List;
 public interface DoctorRepository {
     List<Doctor> getAllDoctors(Long doctorId);
 
-    void saveDoctor(Doctor doctor,Long hospital);
+    void saveDoctor(Doctor doctor, Long hospital);
 
     void saveDoctorInfo(Doctor doctor);
 
@@ -16,7 +16,7 @@ public interface DoctorRepository {
 
     void deleteDoctorById(Long id);
 
-    void updateDoctor(Long doctorId,Doctor doctor);
+    void updateDoctor(Long doctorId, Doctor doctor);
 
-    void assignDoctor(Long appointmentId,Long doctorId) throws IOException;
+    void assignDoctor(Long appointmentId, Long doctorId) throws IOException;
 }

@@ -10,17 +10,14 @@ import java.util.List;
 
 import static jakarta.persistence.CascadeType.*;
 
-@Getter
-@Setter
 @NoArgsConstructor
+@Getter @Setter
 @Table(name = "departments")
 @Entity
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "department_seq")
-    @SequenceGenerator(name = "department_seq",
-            sequenceName = "department_seq",
-            allocationSize = 1)
+    @SequenceGenerator(name = "department_seq", sequenceName = "department_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name",unique = true)
@@ -28,7 +25,6 @@ public class Department {
 
     @ManyToMany(cascade = {REFRESH,MERGE,DETACH},fetch = FetchType.EAGER,mappedBy = "departments")
     private List<Doctor> doctors = new ArrayList<>();
-
 
     public void addDoctors(Doctor doctor){
         if (doctors == null){

@@ -15,9 +15,9 @@ public interface DepartmentService {
 
     void deleteDepartmentById(Long id);
 
-    void updateDepartment(Long departmentId,Department department);
+    void updateDepartment(Long departmentId, Department department);
 
-    void AssignDepartment(Long doctorId,Long departmentId) throws IOException;
+    void AssignDepartment(Long doctorId, Long departmentId) throws IOException;
 
-    void AssignDepartmentToAppointment(Long appointmentId,Long departmentId) throws IOException;
+    void AssignDepartmentToAppointment(Long appointmentId, Long departmentId) throws IOException;
 }
