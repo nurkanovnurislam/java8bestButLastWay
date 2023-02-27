@@ -18,8 +18,8 @@
   </tr>
   </thead>
 
-
-  <tr "th:each="hospitael:${hospitals}">
+<!--s-->
+  <tr th:each="hospitals:${hospitals}">
     <td th:text="${hospital.getName()}"></td>
     <td th:text="${hospital.getAddress()}"></td>
     <td th:text="${hospital.getCount()}"></td>

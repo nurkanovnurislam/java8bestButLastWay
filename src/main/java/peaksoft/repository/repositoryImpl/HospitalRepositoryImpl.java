@@ -17,8 +17,8 @@ public class HospitalRepositoryImpl implements HospitalRepository {
     private  final EntityManager manager;
 
     @Autowired
-    public HospitalRepositoryImpl(EntityManager entityManager) {
-        this.manager = entityManager;
+    public HospitalRepositoryImpl(EntityManager manager) {
+        this.manager = manager;
     }
 
 

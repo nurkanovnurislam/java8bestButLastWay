@@ -22,8 +22,8 @@ public class DoctorRepositoryImpl implements DoctorRepository {
 
 
     @Autowired
-    public DoctorRepositoryImpl(EntityManager entityManager) {
-        this.manager = entityManager;
+    public DoctorRepositoryImpl(EntityManager manager) {
+        this.manager = manager;
     }
 
     @Override

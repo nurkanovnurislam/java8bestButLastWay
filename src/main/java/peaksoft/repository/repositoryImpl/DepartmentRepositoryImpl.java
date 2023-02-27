@@ -22,8 +22,8 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 
 
     @Autowired
-    public DepartmentRepositoryImpl(EntityManager entityManager) {
-        this.manager = entityManager;
+    public DepartmentRepositoryImpl(EntityManager manager) {
+        this.manager = manager;
     }
 
     @Override

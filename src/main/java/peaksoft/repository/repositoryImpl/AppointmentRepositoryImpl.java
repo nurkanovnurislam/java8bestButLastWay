@@ -20,8 +20,8 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     private final EntityManager manager;
 
     @Autowired
-    public AppointmentRepositoryImpl(EntityManager entityManager) {
-        this.manager = entityManager;
+    public AppointmentRepositoryImpl(EntityManager manager) {
+        this.manager = manager;
     }
 
     @Override
